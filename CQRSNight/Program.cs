@@ -1,6 +1,7 @@
 using CQRSNight.Context;
 using CQRSNight.CQRSDesingPattern.Handlers.CategoryHandlers;
 using CQRSNight.CQRSDesingPattern.Handlers.ProductHandlers;
+using System.Reflection;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -20,6 +21,9 @@ builder.Services.AddScoped<GetProductByIdQueryHandler>();
 builder.Services.AddScoped<GetProductQueryHandler>();
 
 builder.Services.AddDbContext<CQRSContext>();
+
+
+builder.Services.AddMediatR(x => x.RegisterServicesFromAssembly(typeof(Program).Assembly));
 
 builder.Services.AddControllersWithViews();
 
